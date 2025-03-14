@@ -14,7 +14,7 @@ app.get('/todos',(req,res)=>{
 
 });
 
-app.post('/todo',(req,res)=>{
+app.post('/todo',async function(req,res){
 const createPayload = req.body;
 const parsedPayload = createTodo.safeParse(createPayload);
 if(!parsedPayload.success){
@@ -24,6 +24,14 @@ if(!parsedPayload.success){
     return; 
 }
 //put things in mongodb
+
+await todo.create({
+    title:parsedPayload.title,
+    description:parsedPayload.description,
+})
+res.json({
+    msg:" todo created"
+})
 
 });
 app.put('/completed',function(req,res){
