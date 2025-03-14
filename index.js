@@ -7,13 +7,6 @@ const app = express();
 app.use(express.json());
 
 
-
-app.get('/todos',(req,res)=>{
-
-
-
-});
-
 app.post('/todo',async function(req,res){
 const createPayload = req.body;
 const parsedPayload = createTodo.safeParse(createPayload);
@@ -34,6 +27,15 @@ res.json({
 })
 
 });
+app.get('/todos',async(req,res)=>{
+const todos = await todo.find({});
+res.json({
+    todos
+})
+
+});
+
+
 app.put('/completed',function(req,res){
 
 const updatePayload = req.body;
