@@ -21,6 +21,7 @@ if(!parsedPayload.success){
 await todo.create({
     title:parsedPayload.title,
     description:parsedPayload.description,
+    completed:false
 })
 res.json({
     msg:" todo created"
@@ -36,7 +37,7 @@ res.json({
 });
 
 
-app.put('/completed',function(req,res){
+app.put('/completed',async function(req,res){
 
 const updatePayload = req.body;
 const parsedPayload = createTodo.safeParse(updatePayload);
@@ -47,15 +48,16 @@ if(!parsedPayload.success){
     })
     return;
 }
+await todo.update({
+    _id:req.body.id
+},{completed:true
 
-
+})
+res.json({
+    msg:"todo marked as completed"
+})
 });
 
-app.delete('/',function(req,res){
-
-
-
-});
 
 app.listen(3000,()=>{
     console.log('server is listening on port 3000')
