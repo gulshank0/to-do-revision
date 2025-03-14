@@ -1,0 +1,16 @@
+{
+  "name": "notes-hub",
+  "version": "1.0.0",
+  "description": "it's all about notes ",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "author": "gulshan kumar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.24.2"
+  }
+}
