@@ -1,23 +1,50 @@
 
 
 const express = require('express');
+const {createTodo } = require('./types');
 const app = express();
 
 app.use(express.json());
 
+
+
 app.get('/todos',(req,res)=>{
-    res.send('hi hello only')
+
+
+
 });
 
 app.post('/todo',(req,res)=>{
-    console.log(req.body);
-    res.send('hi hello only')
+const createPayload = req.body;
+const parsedPayload = createTodo.safeParse(createPayload);
+if(!parsedPayload.success){
+    return res.status(411).json({
+        msg:"You sent wrong inputs "
+    })
+    return; 
+}
+//put things in mongodb
+
 });
-app.put('/complete',function(req,res){
-    res.send('hi hello only')
+app.put('/completed',function(req,res){
+
+const updatePayload = req.body;
+const parsedPayload = createTodo.safeParse(updatePayload);
+
+if(!parsedPayload.success){
+    res.status(411).json({
+        msg:"You sent wrong inputs"
+    })
+    return;
+}
+
+
 });
+
 app.delete('/',function(req,res){
-    res.send('hi hello only')
+
+
+
 });
 
 app.listen(3000,()=>{
